@@ -12,6 +12,14 @@ map.on("locationfound", (e) => {
   const marker = L.marker(coords);
   marker.bindPopup("User 2");
   map.addLayer(marker);
+  socket.emit("userCoordinates", e.latlng);
+});
+
+socket.on("NewUserCoordinates", (coords) => {
+  console.log("New user is connected");
+  const marker = L.marker([coords.lat, coords.lng]);
+  marker.bindPopup("User 1");
+  map.addLayer(marker);
 });
 
 const marker = L.marker([4.5891058, -74.1483976]);
